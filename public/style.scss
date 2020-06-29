@@ -1,0 +1,83 @@
+$main_color: #2c3e50;
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+input, textarea, select, button {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	color: inherit;
+}
+
+.wrapper {
+	width: 800px;
+	margin: auto;
+}
+
+body {
+	margin: 0;
+	font-family: Calibri;
+}
+
+.header {
+	background-color: $main_color;
+	width: 100%;
+
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo {
+		img {
+			height: 60px;
+			filter: invert(1);
+		}
+	}
+
+	.menu {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		width: 300px;
+		font-size: 18px;
+		color: white;
+	}
+}
+
+.sign {
+	display: flex;
+	justify-content: space-around;
+	align-items: baseline;
+	margin-top: 100px;
+
+	form {
+		width: 300px;
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		display: grid;
+		border-radius: 5px;
+		padding: 10px;
+
+		input {
+			border: none;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+			padding: 10px;
+			margin-bottom: 10px;
+			outline: none;
+			
+		}
+
+		button {
+			border: none;
+			background-color: $main_color;
+			padding: 10px;
+			font-size: 20px;
+			color: white;
+			border-radius: 5px;
+		}
+	}
+}

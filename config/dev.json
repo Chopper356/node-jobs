@@ -1,4 +1,5 @@
 {
-	"mongo": "mongodb://localhost:27017/jobs",
-	"port": 3000
+	"mongo": "mongodb://localhost:27017/jobs-practic",
+	"port": 3000,
+	"secret_key": "dev_jobs"
 }

@@ -1,0 +1,18 @@
+<div class="sign">
+	<form action="/auth/login" method="POST">
+		<input name="email" type="email" placeholder="Email" required>
+		<input name="password" type="password" placeholder="Password" required>
+		<label><input checked type="radio" name="type" value="hirer"> Hirer </label>
+		<label><input type="radio" name="type" value="executor"> Executor </label>
+		<button type="submit">Login</button>
+	</form>
+	<form action="/auth/register" method="POST">
+		<input name="name" type="text" placeholder="Name" required>
+		<input name="email" type="email" placeholder="Email" required>
+		<input name="password" type="password" placeholder="Password" required>
+		<input name="repeat" type="password" placeholder="Password repeat" required>
+		<label><input checked type="radio" name="type" value="hirer"> Hirer </label>
+		<label><input type="radio" name="type" value="executor"> Executor </label>
+		<button type="submit">Register</button>
+	</form>
+</div>
