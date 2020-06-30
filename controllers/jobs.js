@@ -48,5 +48,44 @@ module.exports = {
 		catch(err) {
 			console.log(err);
 		}
+	},
+
+	async renderJobPage(req, res) {
+		try {
+			const job = await Job.findById(req.params.id).populate("creator", "name").lean();
+			res.render("job", {
+				title: `Job: ${Job.title}`,
+				job
+			});
+		}
+		catch(err) {
+			res.send("Job error")
+			console.log(err)
+		}
+	},
+
+	async renderEditPage(req, res) {
+		const job = await Job.findById(req.params.id).lean();
+		res.render("edit-job", {
+			title: "Edit job",
+			job
+		});
+	},
+
+	async editJob(req, res) {
+		const {_id} = req.body;
+
+		try {
+			const job = await Job.findById(_id);
+
+			Object.assign(job, req.body)
+			await job.save();
+
+			res.redirect("/jobs");
+		}
+		catch(err) {
+			res.send("Edit error")
+			console.log(err);
+		}
 	}
 }

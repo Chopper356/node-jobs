@@ -25,6 +25,8 @@ body {
 .header {
 	background-color: $main_color;
 	width: 100%;
+	display: flex;
+	align-items: center;
 
 	.wrapper {
 		display: flex;
@@ -41,11 +43,21 @@ body {
 
 	.menu {
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-evenly;
 		align-items: center;
 		width: 300px;
 		font-size: 18px;
 		color: white;
+	}
+
+	.right-menu {
+		font-size: 18px;
+		color: white;
+		margin-right: 25px;
+
+		.login {
+			margin-right: 15px;
+		}
 	}
 }
 
@@ -137,6 +149,28 @@ body {
 		.date span {
 			font-weight: bold;
 		}
+	}
+
+	.job-title {
+		font-size: 36px;
+	}
+
+	.job-desc {
+		font-size: 22px;
+		color: black;
+	}
+
+	.edit-btn {
+		padding: 10px;
+		background-color: $main_color;
+		color: white;
+		border-radius: 5px;
+	}
+
+	.job-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 }
 

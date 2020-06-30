@@ -18,6 +18,7 @@ module.exports = {
 			}
 
 			req.session.user = user;
+			console.log(req.session.user)
 			req.session.save(err => {
 				if(err) {
 					throw err
