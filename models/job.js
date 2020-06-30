@@ -1,4 +1,5 @@
 const {Schema, model} = require("mongoose");
+const Hirer = require("./hirer");
 
 const Job = new Schema({
 	title: {
@@ -10,7 +11,8 @@ const Job = new Schema({
 		required: true
 	},
 	creator: {
-		type: String,
+		type: Schema.Types.ObjectId,
+		ref: "Hirer",
 		required: false
 	},
 	dateCreated: {

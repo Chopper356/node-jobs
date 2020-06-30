@@ -1,7 +1,20 @@
-<h1>Jobs</h1>
+<div class="jobs-header">
+	<h1>Jobs</h1>
 
-<ul>
-	{{#each jobs}}
-	<li>{{ this }}</li>
-	{{/each}}
-</ul>
+	<a class="a-create" href="/jobs/create">Create job</a>
+</div>
+
+{{#each jobs}}
+	<div class="job">
+		<div class="title">{{title}}</div>
+		<div class="description">{{description}}</div>
+		<div class="job-footer">
+			<div class="date">Date of creation: <span>{{moment date=dateCreated format="DD/MM/Y"}}</span></div>
+			<div class="creator">Creator: <span>{{creator.name}}</span></div>
+		</div>
+	</div>
+{{/each}}
+
+{{#unless jobs.length}}
+	<div class="no-work">No work yet!</div>
+{{/unless}}

@@ -1,5 +1,6 @@
 {
 	"mongo": "mongodb://localhost:27017/jobs-practic",
 	"port": 3000,
-	"secret_key": "dev_jobs"
+	"session_key": "dev_jobs",
+	"cookie_key": "keyboard cat"
 }

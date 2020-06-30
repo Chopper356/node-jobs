@@ -18,7 +18,12 @@ module.exports = {
 			}
 
 			req.session.user = user;
-			res.redirect("/");			
+			req.session.save(err => {
+				if(err) {
+					throw err
+				}
+				res.redirect("/");
+			});
 		}
 		catch(err) {
 			res.send("Server error");
@@ -57,10 +62,16 @@ module.exports = {
 			console.log(err);
 		}
 	},
+	logout(req, res) {
+		req.session.destroy(function(err) {
+			res.redirect("/");
+		});
+	},
 	page(req, res) {
 		if(req.session.user) {
 			return res.redirect("/");
 		}
+
 		res.render("auth");
 	}
 }

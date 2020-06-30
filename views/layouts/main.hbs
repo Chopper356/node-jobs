@@ -18,6 +18,8 @@
 				<a href="/jobs" class="jobs">Jobs</a>
 				{{#if user}}
 					<a href="/profile" class="login">{{user.name}}</a>
+
+					<a href="/auth/logout">Logout</a>
 				{{else}}
 					<a href="/auth" class="login">Login</a>
 				{{/if}}
