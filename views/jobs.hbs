@@ -4,6 +4,18 @@
 	<a class="a-create" href="/jobs/create">Create job</a>
 </div>
 
+{{#if jobsError}}
+	<p class="error">{{jobsError}}</p>
+{{/if}}
+
+{{#if errorCreateJob}}
+	<p class="error">{{errorCreateJob}}</p>
+{{/if}}
+
+{{#if errorJob}}
+	<p class="error">{{errorJob}}</p>
+{{/if}}
+
 {{#each jobs}}
 	<div class="job">
 		<a href="/jobs/job/{{_id}}" class="title">{{title}}</a>

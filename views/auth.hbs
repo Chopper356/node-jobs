@@ -5,6 +5,13 @@
 		<label><input checked type="radio" name="type" value="hirer"> Hirer </label>
 		<label><input type="radio" name="type" value="executor"> Executor </label>
 		<button type="submit">Login</button>
+		{{#if errorLogin}}
+			<p class="error">{{errorLogin}}</p>
+		{{/if}}
+
+		{{#if serverError}}
+			<p class="error">{{serverError}}</p>
+		{{/if}}
 	</form>
 	<form action="/auth/register" method="POST">
 		<input name="name" type="text" placeholder="Name" required>
@@ -14,5 +21,12 @@
 		<label><input checked type="radio" name="type" value="hirer"> Hirer </label>
 		<label><input type="radio" name="type" value="executor"> Executor </label>
 		<button type="submit">Register</button>
+		{{#if errorRegister}}
+			<p>{{errorRegister}}</p>
+		{{/if}}
+
+		{{#if serverError}}
+			<p>{{serverError}}</p>
+		{{/if}}
 	</form>
 </div>

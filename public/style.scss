@@ -211,3 +211,16 @@ body {
 		cursor: pointer;
 	}
 }
+
+.error {
+	padding: 5px;
+	margin-top: 10px;
+	color: #e74c3c;
+	border: 1px solid #e74c3c;
+	border-radius: 5px;
+	font-size: 20px;
+	width: 100%;
+	text-align: center;
+	box-sizing: border-box;
+	margin-bottom: 0px;
+}

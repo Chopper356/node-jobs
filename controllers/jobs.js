@@ -6,11 +6,14 @@ module.exports = {
 		Job.find().populate("creator", "name").lean().then(jobs => {
 			res.render("jobs", {
 				title: "Jobs",
+				jobsError: req.flash("jobsError"),
+				errorCreateJob: req.flash("errorCreateJob"),
+				errorJob: req.flash("errorJob"),
 				jobs
 			});
 		}).catch(err => { 
-			res.send("Jobs error");
-			console.log(err)
+			res.flash("jobsError", "Error render jobs");
+			return res.redirect("/jobs");
 		});
 	},
 
@@ -46,7 +49,8 @@ module.exports = {
 			res.redirect("/jobs");
 		}
 		catch(err) {
-			console.log(err);
+			req.flash("errorCreateJob", "Job create error");
+			return res.redirect("/jobs");
 		}
 	},
 
@@ -55,21 +59,28 @@ module.exports = {
 			const job = await Job.findById(req.params.id).populate("creator", "name").lean();
 			res.render("job", {
 				title: `Job: ${Job.title}`,
+				errorEdit: req.flash("errorEdit"),
 				job
 			});
 		}
 		catch(err) {
-			res.send("Job error")
-			console.log(err)
+			req.flash("errorJob", "Render job page error");
+			return res.redirect("/jobs");
 		}
 	},
 
 	async renderEditPage(req, res) {
-		const job = await Job.findById(req.params.id).lean();
-		res.render("edit-job", {
-			title: "Edit job",
-			job
-		});
+		try {
+			const job = await Job.findById(req.params.id).lean();
+			res.render("edit-job", {
+				title: "Edit job",
+				job
+			});
+		}
+		catch(err) {
+			req.flash("errorEdit", "Render edit page error");
+			return res.redirect("/jobs");
+		}
 	},
 
 	async editJob(req, res) {
@@ -84,8 +95,8 @@ module.exports = {
 			res.redirect("/jobs");
 		}
 		catch(err) {
-			res.send("Edit error")
-			console.log(err);
+			req.flash("errorEdit", "Edit error");
+			return res.redirect("/jobs");
 		}
 	}
 }

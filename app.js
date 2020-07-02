@@ -23,7 +23,8 @@ const hbsConfig = hbs.create({
 	extname: "hbs",
 	allowProtoPropertiesByDefault: true,
 	allowedProtoProperties: true,
-	allowProtoMethodsByDefault: true
+	allowProtoMethodsByDefault: true,
+	helpers: require("./helpers/hbs-helpers"),
 });
 MomentHandler.registerHelpers(hbsConfig.handlebars);
 

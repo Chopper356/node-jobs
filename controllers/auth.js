@@ -14,11 +14,12 @@ module.exports = {
 			const user = await User.findOne({email: req.body.email, password: md5(req.body.password)});
 
 			if (!user) {
-				return res.send("User not found");
+				req.flash("errorLogin", "Email is incorrect.");
+				return res.redirect("/auth");
 			}
 
 			req.session.user = user;
-			console.log(req.session.user)
+			req.session.user_type = type
 			req.session.save(err => {
 				if(err) {
 					throw err
@@ -27,8 +28,8 @@ module.exports = {
 			});
 		}
 		catch(err) {
-			res.send("Server error");
-			console.log(err);
+			req.flash("serverError", "Server error. Please try again later.");
+			return res.redirect("/auth");
 		}
 	},
 	async register(req, res) {
@@ -42,11 +43,13 @@ module.exports = {
 			const user = await User.findOne({email: req.body.email});
 
 			if (user) {
-				return res.send("User already exists");
+				req.flash("errorRegister", "Email already exists.");
+				return res.redirect("/auth");
 			}
 
 			if (req.body.password !== req.body.repeat) {
-				return res.send("Password mismatch");
+				req.flash("errorRegister", "Password mismatch.");
+				return res.redirect("/auth");
 			}
 
 			User.create({
@@ -59,8 +62,8 @@ module.exports = {
 			
 		}
 		catch(err) {
-			res.send("Server error");
-			console.log(err);
+			req.flash("serverError", "Server error. Please try again later.");
+			return res.redirect("/auth");
 		}
 	},
 	logout(req, res) {
@@ -73,6 +76,11 @@ module.exports = {
 			return res.redirect("/");
 		}
 
-		res.render("auth");
+		res.render("auth", {
+			title: "Login and register",
+			errorLogin: req.flash("errorLogin"),
+			serverError: req.flash("serverError"),
+			errorRegister: req.flash("errorRegister")
+		});
 	}
 }
