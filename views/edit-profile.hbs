@@ -1,0 +1,17 @@
+<h1>Profile edit</h1>
+
+<div class="profile">
+	<div class="left">
+		<img src="/img/user-img.jpg" alt="Image user: {{user.name}}">
+		<a href="/profile/{{user_type}}/{{user._id}}" class="settings">Back</a>
+		<a href="/auth/logout" class="logout">Logout</a>
+	</div>
+	<div class="right">
+		<div class="title">Information:</div>
+		<form action="/profile/edit" method="POST">
+			<div class="info name">Name: <input type="name" name="name" value="{{user.name}}"></div>
+			<div class="info email">Email: <input type="email" name="email" value="{{user.email}}"></div>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+</div>

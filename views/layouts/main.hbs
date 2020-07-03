@@ -21,7 +21,7 @@
 		</div>
 		<div class="right-menu">
 			{{#if user}}
-				<a href="/profile" class="login">{{user.name}}</a>
+				<a href="/profile/{{user_type}}/{{user._id}}" class="login">{{user.name}}</a>
 
 				<a href="/auth/logout">Logout</a>
 			{{else}}

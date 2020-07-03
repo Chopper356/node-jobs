@@ -14,6 +14,8 @@ const Hirer = Schema({
 		required: true,
 		select: false
 	}
+}, {
+	versionKey: false 
 });
 
 module.exports = model("Hirer", Hirer);

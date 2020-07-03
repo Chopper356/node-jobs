@@ -224,3 +224,76 @@ body {
 	box-sizing: border-box;
 	margin-bottom: 0px;
 }
+
+.profile {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+
+	.left {
+		width: 300px;
+		img {
+			height: 200px;
+			width: 100%;
+		}
+
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 1px solid rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			padding: 5px;
+			cursor: pointer;
+			outline: none;
+			transition: color 0.25s;
+			color: white;
+			font-size: 20px;
+			margin-top: 10px;
+		}
+
+		.settings {
+			background-color: #e74c3c;
+		}
+		.logout {
+			background-color: #2ecc71;
+		}
+	}
+
+	.right {
+		.title {
+			font-size: 42px;
+		}
+
+		.info {
+			margin-top: 10px;
+			font-size: 18px;
+		}
+
+		.name { 
+			margin-top: 30px;
+		}
+		span {
+			font-weight: bold;
+		}
+
+		input {
+			outline: none;
+			border: none;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+			width: 250px;
+		}
+
+		button {
+			border: 1px solid rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			padding: 5px;
+			cursor: pointer;
+			outline: none;
+			background-color: $main_color;
+			color: white;
+			width: 100%;
+			margin-top: 15px;
+		}
+	}
+}

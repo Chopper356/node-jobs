@@ -19,7 +19,7 @@ module.exports = {
 			}
 
 			req.session.user = user;
-			req.session.user_type = type
+			req.session.user_type = type;
 			req.session.save(err => {
 				if(err) {
 					throw err

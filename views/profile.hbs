@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+
+{{#if errorEdit}}
+	<p class="error">{{errorEdit}}</p>
+{{/if}}
+<div class="profile">
+	<div class="left">
+		<img src="/img/user-img.jpg" alt="Image user: {{user.name}}">
+		{{#ifeqid user._id profile._id}}
+			<a href="/profile/settings" class="settings">Settings</a>
+			<a href="/auth/logout" class="logout">Logout</a>
+		{{/ifeqid}}
+	</div>
+	<div class="right">
+		<div class="title">Information:</div>
+		<div class="info name">Name: <span>{{user.name}}</span></div>
+		<div class="info email">Email: <span>{{user.email}}</span></div>
+	</div>
+</div>

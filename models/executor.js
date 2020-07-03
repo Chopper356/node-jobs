@@ -14,6 +14,8 @@ const Executor = Schema({
 		required: true,
 		select: false
 	}
+}, {
+	versionKey: false 
 });
 
 module.exports = model("Executor", Executor);

@@ -84,10 +84,8 @@ module.exports = {
 	},
 
 	async editJob(req, res) {
-		const {_id} = req.body;
-
 		try {
-			const job = await Job.findById(_id);
+			const job = await Job.findById(req.body._id);
 
 			Object.assign(job, req.body)
 			await job.save();
