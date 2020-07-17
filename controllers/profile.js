@@ -1,5 +1,6 @@
 const Hirer = require("../models/hirer");
 const Executor = require("../models/executor");
+const Comment = require("../models/comment");
 
 module.exports = {
 	async pageHirer(req, res) {
@@ -17,6 +18,7 @@ module.exports = {
 	},
 	async pageExecutor(req, res) {
 		const profile = await Executor.findById(req.params.id).lean();
+		const comments = await Comment.find({creator: req.params.id}).populate("job", "title").populate("creator", "name").lean();
 
 		if(!profile) {
 			return res.redirect("/");
@@ -25,7 +27,8 @@ module.exports = {
 		res.render("profile", {
 			title: "Profile executor",
 			errorEdit: req.flash("errorEdit"),
-			profile
+			profile,
+			comments
 		})
 	},
 	async renderSettingsPage(req, res) {

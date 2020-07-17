@@ -1,4 +1,5 @@
 const Job = require("../models/job");
+const Comment = require("../models/comment");
 const {validationResult} = require("express-validator");
 
 module.exports = {
@@ -9,6 +10,7 @@ module.exports = {
 				jobsError: req.flash("jobsError"),
 				errorCreateJob: req.flash("errorCreateJob"),
 				errorJob: req.flash("errorJob"),
+				errorComment: req.flash("errorComment"),
 				jobs
 			});
 		}).catch(err => { 
@@ -57,14 +59,21 @@ module.exports = {
 	async renderJobPage(req, res) {
 		try {
 			const job = await Job.findById(req.params.id).populate("creator", "name").lean();
+			const comments = await Comment.find({job: req.params.id}).populate("creator", "name").lean();
+			const isSubmited = req.session.user ? !!comments.find(el => {
+				return el.creator == req.session.user._id;
+			}) : false;
 			res.render("job", {
 				title: `Job: ${Job.title}`,
 				errorEdit: req.flash("errorEdit"),
-				job
+				job,
+				comments,
+				isSubmited
 			});
 		}
 		catch(err) {
 			req.flash("errorJob", "Render job page error");
+			console.log(err);
 			return res.redirect("/jobs");
 		}
 	},
@@ -95,6 +104,60 @@ module.exports = {
 		catch(err) {
 			req.flash("errorEdit", "Edit error");
 			return res.redirect("/jobs");
+		}
+	},
+
+	async createComment(req, res) {
+		try {
+			await Comment.create({
+				creator: req.session.user._id,
+				message: req.body.comment,
+				job: req.body.jobId,
+				dateCreated: Date.now()
+			});
+
+			res.redirect("/jobs");
+		}
+		catch(err) {
+			console.log(err);
+			req.flash("errorComment", "Comment error");
+			return res.redirect("/jobs");
+		}
+	},
+
+	async deleteComment(req, res) {
+		try {
+			const comment = await Comment.findOneAndUpdate({_id: req.params.id}, {$set: {status: "accepted"}});
+			
+			res.redirect(`/jobs/${comment.job}`);
+		}
+		catch(err) {
+			res.redirect("/jobs");
+			console.log(err);
+		}
+	},
+
+	async acceptComment(req, res) {
+		try {
+			const comment = await Comment.findOneAndUpdate({_id: req.params.id}, {$set: {status: "accepted"}});
+
+			res.redirect(`/jobs/${comment.job}`);
+		}
+		catch(err) {
+			res.redirect("/jobs");
+			console.log(err);
+		}
+	},
+
+	async completeComment(req, res) {
+		try {
+			const comment = await Comment.findOneAndUpdate({_id: req.params.id}, {$set: {status: "completed"}});
+
+			res.redirect(`/jobs/${comment.job}`);
+		}
+		catch(err) {
+			res.redirect("/jobs");
+			console.log(err);
 		}
 	}
 }

@@ -114,7 +114,6 @@ body {
 .job {
 	margin: auto;
 	margin-top: 20px;
-	width: 500px;
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	padding: 15px;
 	border-radius: 5px;
@@ -226,9 +225,12 @@ body {
 }
 
 .profile {
-	display: flex;
-	justify-content: space-between;
 	margin-top: 10px;
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+	}
 
 	.left {
 		width: 300px;
@@ -294,6 +296,165 @@ body {
 			color: white;
 			width: 100%;
 			margin-top: 15px;
+		}
+	}
+
+	.bottom {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 40px;
+
+		.work {
+			border: 1px solid $main_color;
+			border-radius: 5px;
+			padding: 10px;
+
+			.head {
+				display: flex;
+				justify-content: space-between;
+
+				span {
+					font-weight: bold;
+				}
+			}
+
+			.footer {
+				margin-top: 15px;
+				display: flex;
+				justify-content: space-between;
+
+				.price {
+					span {
+						font-weight: bold;
+						color: #2ecc71;
+					}
+				}
+
+				.date {
+					span {
+						font-weight: bold;
+						color: #008cff;
+					}
+				}
+			}
+
+			.job-name {
+				span {
+					font-weight: bold;
+				}
+			}
+		}
+
+		.left {
+			border-right: 1px solid $main_color;
+			width: 400px;
+			padding-right: 10px;
+
+			.title {
+				font-size: 42px;
+				text-align: center;
+			}
+		}
+
+		.right {
+			width: 400px;
+			padding-left: 10px;
+
+			.title {
+				text-align: center;
+			}
+		}
+	}
+}
+
+.comment-form {
+	width: 100%;
+	margin-top: 20px;
+	padding-bottom: 75px;
+
+	textarea {
+		min-width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
+		outline: none;
+		min-height: 100px;
+		max-height: 150px;
+	}
+
+	button {
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		border-radius: 5px;
+		padding: 10px 20px;
+		cursor: pointer;
+		outline: none;
+		background-color: $main_color;
+		color: white;
+		margin-top: 15px;
+		float: right;
+	}
+
+	.creator {
+		margin-bottom: 5px;
+		font-size: 18px;
+		span {
+			font-weight: bold;
+		}
+	}
+}
+
+.comment {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin-top: 20px;
+	
+	&.refused {
+		opacity: 0.3;
+	}
+
+	&.accepted {
+		opacity: 1 !important;
+		background-color: #2ecc7093;
+	}
+	&.completed {
+		background-color: #f1c40faf;
+	}
+
+	.comment-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		div {
+			font-size: 20px;
+		}
+
+		span {
+			font-weight: bold;
+		}
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 10px;
+
+		button {
+			padding: 10px 15px;
+			color: white;
+			border-radius: 10px;
+			border: none;
+		}
+
+		.refuse {
+			background-color: #e74c3c;
+		}
+		.accept {
+			background-color: #2ecc71;
+		}
+		.complete {
+			background-color: #3498db;
 		}
 	}
 }

@@ -4,16 +4,52 @@
 	<p class="error">{{errorEdit}}</p>
 {{/if}}
 <div class="profile">
-	<div class="left">
-		<img src="/img/user-img.jpg" alt="Image user: {{user.name}}">
-		{{#ifeqid user._id profile._id}}
-			<a href="/profile/settings" class="settings">Settings</a>
-			<a href="/auth/logout" class="logout">Logout</a>
-		{{/ifeqid}}
+	<div class="top">
+		<div class="left">
+			<img src="/img/user-img.jpg" alt="Image user: {{user.name}}">
+			{{#ifeqid user._id profile._id}}
+				<a href="/profile/settings" class="settings">Settings</a>
+				<a href="/auth/logout" class="logout">Logout</a>
+			{{/ifeqid}}
+		</div>
+		<div class="right">
+			<div class="title">Information:</div>
+			<div class="info name">Name: <span>{{user.name}}</span></div>
+			<div class="info email">Email: <span>{{user.email}}</span></div>
+		</div>
 	</div>
-	<div class="right">
-		<div class="title">Information:</div>
-		<div class="info name">Name: <span>{{user.name}}</span></div>
-		<div class="info email">Email: <span>{{user.email}}</span></div>
+	<div class="bottom">
+		{{#each comments}}
+			<div class="left">
+				<div class="title">Executed</div>
+				{{#ifeq status "accepted"}}
+					<div class="work">
+						<div class="head">
+							<div class="job-name">Work: <span>{{job.title}}</span></div>
+							<div class="hirer">Hirer: <span>{{creator.name}}</span></div>
+						</div>
+						<div class="footer">
+							<div class="price">Price: <span>1500$</span></div>
+							<div class="date">Date: <span>{{moment date=dateCreated format="DD/MM/Y"}}</span></div>
+						</div>
+					</div>
+				{{/ifeq}}
+			</div>
+			<div class="right">
+				<div class="title">Completed</div>
+				{{#ifeq status "completed"}}
+					<div class="work">
+						<div class="head">
+							<div class="job-name">Work: <span>{{job.title}}</span></div>
+							<div class="hirer">Hirer: <span>{{creator.name}}</span></div>
+						</div>
+						<div class="footer">
+							<div class="price">Price: <span>1500$</span></div>
+							<div class="date">Date: <span>{{moment date=dateCreated format="DD/MM/Y"}}</span></div>
+						</div>
+					</div>
+				{{/ifeq}}
+			</div>
+		{{/each}}
 	</div>
 </div>

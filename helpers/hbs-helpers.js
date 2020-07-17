@@ -18,4 +18,16 @@ module.exports = {
 		}
 		return options.inverse(this);
 	},
+	ifeqeq(a, b, c, d, options) {
+		if(a == b && c == d) {
+			return options.fn(this);
+		}
+		return options.inverse(this);
+	},
+	ifeqin(a, b, c, d, options) {
+		if(a == b || c == d) {
+			return options.fn(this);
+		}
+		return options.inverse(this);
+	},
 }

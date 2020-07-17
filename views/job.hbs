@@ -6,9 +6,11 @@
 <div class="job">
 	<div class="job-header">
 		<div class="title job-title">{{job.title}}</div>
-		{{#ifeq user._id job.creator._id}}
-			<a class="edit-btn" href="/jobs/job/edit/{{job._id}}">Edit</a>
-		{{/ifeq}}
+		{{#if user._id}}
+			{{#ifeqid user._id job.creator._id}}
+				<a class="edit-btn" href="/jobs/edit/{{job._id}}">Edit</a>
+			{{/ifeqid}}
+		{{/if}}
 	</div>
 	<div class="description job-desc">{{job.description}}</div>
 
@@ -17,3 +19,50 @@
 		<div class="creator">Creator: <span>{{job.creator.name}}</span></div>
 	</div>
 </div>	
+
+{{#if user._id}}
+	{{#if isSubmited }}
+		{{#ifeq user_type "executor"}}
+			<form class="comment-form" action="/jobs/comment" method="POST">
+				<div class="creator">Name: <span>{{user.name}}</span></div>
+				<textarea type="text" name="comment" placeholder="Enter your request"></textarea>
+				<input type="hidden" name="jobId" value="{{job._id}}">
+				<button type="submit">Submit</button>
+			</form>
+		{{/ifeq}}
+	{{/if}}
+{{/if}}
+
+<div class="comments">
+	<h1>Requests:</h1>
+	{{#each comments}}
+		<div class="comment {{status}}">
+			<div class="comment-header">
+				<div class="creator">Executor: <span><a href="">{{creator.name}}</a></span></div>
+				<div class="date">Date: <span>{{moment date=dateCreated format="DD/MM/Y"}}</span></div>
+			</div>
+			<div class="message">{{message}}</div>
+			<div class="footer">
+				{{#if @root.user._id}}
+					{{#ifeqid @root.user._id @root.job.creator._id}}
+						{{#ifeq status "waiting"}}
+							<form action="/jobs/comment/{{_id}}/refuse" method="POST">
+								<input type="hidden" name="jobId" value="{{@root.job._id}}">
+								<button type="submit" class="refuse">Refuse</button>
+							</form>
+							<form action="/jobs/comment/{{_id}}/accept" method="POST">
+								<button type="submit" class="accept">Accept</button>
+							</form>				
+						{{/ifeq}}
+
+						{{#ifeq status "accepted"}}
+							<form action="/jobs/comment/{{_id}}/complete" method="POST">
+								<button type="submit" class="complete">Complete</button>
+							</form>	
+						{{/ifeq}}
+					{{/ifeqid}}
+				{{/if}}
+			</div>
+		</div>
+	{{/each}}
+</div>
